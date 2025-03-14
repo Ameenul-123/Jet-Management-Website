@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import api from './api';
 import './flightinfo.css'; // Importing external CSS
 import './index.css'
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const FlightInfo = () => {
     const [flightInfo, setFlightInfo] = useState([]);
     const location = useLocation();
+    const navigate = useNavigate();
     
     // Extract query parameters (from, to, date) from URL
     const searchParams = new URLSearchParams(location.search);
@@ -25,6 +26,10 @@ const FlightInfo = () => {
         console.log(err.message);
       });
   }, [fromCity, toCity, date]);
+
+  const handleBooking = (flight) => {
+    navigate('/bookinfo', { state: { flight } });
+  };
 
   if (flightInfo.length===0){
     return (
@@ -50,7 +55,7 @@ const FlightInfo = () => {
             <div>DEPARTURE</div>
             <div>DURATION</div>
             <div>ARRIVAL</div>
-            <div>PRICE</div>
+            <div>BOOK</div>
           </div>
     <p className='text-center'>No Flights Available</p>
         </div>
@@ -81,7 +86,7 @@ const FlightInfo = () => {
         <div>DEPARTURE</div>
         <div>DURATION</div>
         <div>ARRIVAL</div>
-        <div>PRICE</div>
+        <div>BOOK</div>
       </div>
 
       {/* Flight Cards */}
@@ -123,8 +128,10 @@ const FlightInfo = () => {
 
             {/* Price */}
             <div className="price-container">
-              <div className="price">₹ {flight.price}</div>
-              <button className="book-button">BOOK NOW</button>
+              {/* <div className="price">₹ {flight.price}</div> */}
+              <button className="book-button" onClick={() => handleBooking(flight)}>
+                BOOK NOW
+                </button>
             </div>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Select from "react-select";
 import "./index.css"; // Ensure this file contains the styles
 
 const Home = () => {
@@ -8,14 +7,17 @@ const Home = () => {
     const [toCity, setToCity] = useState('');
     const [date, setDate] = useState('');
     const navigate = useNavigate(); // For redirection
+    
 
     const handleSearch = () => {
+
         if (fromCity && toCity && date) {
             navigate(`/flightinfo?from=${fromCity}&to=${toCity}&date=${date}`);
         } else {
             alert("Please fill all fields!");
         }
     };
+
 
     return (
         <>
@@ -44,29 +46,28 @@ const Home = () => {
                     <div className="search-section">
                         <form onSubmit={(e) => e.preventDefault()}>
                             <label htmlFor="from">From (Departure):</label>
-                            <Select
-                                type="text"
-                                id="from"
-                                options={CITIES}
-                                value={fromCity}
-                                onChange={(e) => setFromCity(e.target.value)}
-                                placeholder="Enter departure location"
-                                isSearchable
-                            />
+                            <select name="from" onChange={(e) => setFromCity(e.target.value)}>
+                              <option value="default" >Select Boarding City</option>
+                              <option value="Mumbai">MUMBAI</option>
+                              <option value="Delhi">DELHI</option>
+                              <option value="Chennai">CHENNAI</option>
+                              <option value="Kochi">KOCHI</option>
+                              <option value="Hyderabad">HYDERABAD</option>
 
+                            </select>
+                          
                             <label htmlFor="to">To (Destination):</label>
-                            <input
-                                type="text"
-                                id="to"
-                                options={CITIES}
-                                value={toCity}
-                                onChange={(e) => setToCity(e.target.value)}
-                                placeholder="Enter destination"
-                                isSearchable
-                            />
+                            <select name="to" onChange={(e) => setToCity(e.target.value)}>
+                              <option value="default" >Select Destination City</option>
+                              <option value="Mumbai">MUMBAI</option>
+                              <option value="Delhi">DELHI</option>
+                              <option value="Chennai">CHENNAI</option>
+                              <option value="Kochi">KOCHI</option>
+                              <option value="Hyderabad">HYDERABAD</option>
 
+                            </select>
                             <label htmlFor="travel-date">Travel Date:</label>
-                            <Select
+                            <input
                                 type="date"
                                 id="travel-date"
                                 value={date}

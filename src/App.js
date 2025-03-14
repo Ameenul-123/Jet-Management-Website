@@ -7,9 +7,11 @@ import Contact from './contact';
 import Logreg from './logreg';
 import Flightinfo from './flightinfo'
 import FlightSearchResults from './flightsearchresults';
+import BookInfo from './bookinfo';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -19,6 +21,7 @@ function App() {
       <Route path="/logreg" element={<Logreg />} />
       <Route path="/flightinfo" element={<Flightinfo />} />
       <Route path="/flight" element={<FlightSearchResults />} />
+      <Route path="/bookinfo" element={<BookInfo />} />
     </Routes>
   );
 }
